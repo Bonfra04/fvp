@@ -48,21 +48,21 @@ flutter:
   plugin:
     implements: video_player
     platforms:
-      android:
-        package: com.mediadevkit.fvp
-        pluginClass: FvpPlugin
-      ios:
-        pluginClass: FvpPlugin
-        sharedDarwinSource: true
+      # android:
+      #   package: com.mediadevkit.fvp
+      #   pluginClass: FvpPlugin
+      # ios:
+      #   pluginClass: FvpPlugin
+      #   sharedDarwinSource: true
       linux:
         dartPluginClass: VideoPlayerRegistrant
         pluginClass: FvpPlugin
-      macos:
-        pluginClass: FvpPlugin
-        sharedDarwinSource: true
-      windows:
-        dartPluginClass: VideoPlayerRegistrant
-        pluginClass: FvpPluginCApi
+      # macos:
+      #   pluginClass: FvpPlugin
+      #   sharedDarwinSource: true
+      # windows:
+      #   dartPluginClass: VideoPlayerRegistrant
+      #   pluginClass: FvpPluginCApi
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
