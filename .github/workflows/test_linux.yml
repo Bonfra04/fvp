@@ -21,6 +21,7 @@ jobs:
       - name: Run Integration Tests
         uses: smithki/xvfb-action@v1.1.2
         with:
+          working-directory: ./example
           run: flutter test integration_test -d linux -r github
 
       # - run: sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
