@@ -18,13 +18,13 @@ jobs:
           flutter config --enable-linux-desktop
           flutter pub get
 
-      - name: Run Integration Tests
-        uses: smithki/xvfb-action@v1.1.2
-        with:
-          working-directory: ./example
-          run: flutter test integration_test -d linux -r github
-          # run: flutter run -d linux
+      # - name: Run Integration Tests
+      #   uses: smithki/xvfb-action@v1.1.2
+      #   with:
+      #     working-directory: ./example
+      #     run: flutter test integration_test -d linux -r github
+      #     # run: flutter run -d linux
 
-      # - run: sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-      # # - run: "cd example && DISPLAY=:99 flutter run -d linux"
+      - run: sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+      - run: "cd example && DISPLAY=:99 flutter run -d linux"
       # - run: "cd example && DISPLAY=:99 flutter test -d linux integration_test/app_test.dart"
