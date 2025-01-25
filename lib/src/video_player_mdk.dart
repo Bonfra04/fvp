@@ -121,56 +121,56 @@ class MdkVideoPlayerPlatform extends VideoPlayerPlatform {
   "maxWidth", "maxHeight": texture max size. if not set, video frame size is used. a small value can reduce memory cost, but may result in lower image quality.
  */
   static void registerVideoPlayerPlatformsWith({dynamic options}) {
-//     _log.fine('registerVideoPlayerPlatformsWith: $options');
-//     if (options is Map<String, dynamic>) {
-//       final platforms = options['platforms'];
-//       if (platforms is List<String>) {
-//         if (!platforms.contains(Platform.operatingSystem)) {
-//           if (_prevImpl != null &&
-//               VideoPlayerPlatform.instance is MdkVideoPlayerPlatform) {
-//             // null if it's the 1st time to call registerWith() including current platform
-//             // if current is not MdkVideoPlayerPlatform, another plugin may set instance
-//             // if current is MdkVideoPlayerPlatform, we have to restore instance,  _prevImpl is correct and no one changed instance
-//             VideoPlayerPlatform.instance = _prevImpl!;
-//           }
-//           return;
-//         }
-//       }
+    _log.fine('registerVideoPlayerPlatformsWith: $options');
+    if (options is Map<String, dynamic>) {
+      final platforms = options['platforms'];
+      if (platforms is List<String>) {
+        if (!platforms.contains(Platform.operatingSystem)) {
+          if (_prevImpl != null &&
+              VideoPlayerPlatform.instance is MdkVideoPlayerPlatform) {
+            // null if it's the 1st time to call registerWith() including current platform
+            // if current is not MdkVideoPlayerPlatform, another plugin may set instance
+            // if current is MdkVideoPlayerPlatform, we have to restore instance,  _prevImpl is correct and no one changed instance
+            VideoPlayerPlatform.instance = _prevImpl!;
+          }
+          return;
+        }
+      }
 
-//       if ((options['fastSeek'] ?? false) as bool) {
-//         _seekFlags |= mdk.SeekFlag.keyFrame;
-//       }
-//       _lowLatency = (options['lowLatency'] ?? 0) as int;
-//       _maxWidth = options["maxWidth"];
-//       _maxHeight = options["maxHeight"];
-//       _fitMaxSize = options["fitMaxSize"];
-//       _tunnel = options["tunnel"];
-//       _playerOpts = options['player'];
-//       _globalOpts = options['global'];
-//       _decoders = options['video.decoders'];
-//       _subtitleFontFile = options['subtitleFontFile'];
-//     }
+      if ((options['fastSeek'] ?? false) as bool) {
+        _seekFlags |= mdk.SeekFlag.keyFrame;
+      }
+      _lowLatency = (options['lowLatency'] ?? 0) as int;
+      _maxWidth = options["maxWidth"];
+      _maxHeight = options["maxHeight"];
+      _fitMaxSize = options["fitMaxSize"];
+      _tunnel = options["tunnel"];
+      _playerOpts = options['player'];
+      _globalOpts = options['global'];
+      _decoders = options['video.decoders'];
+      _subtitleFontFile = options['subtitleFontFile'];
+    }
 
-//     if (_decoders == null && !PlatformEx.isAndroidEmulator()) {
-//       // prefer hardware decoders
-//       const vd = {
-//         'windows': ['MFT:d3d=11', "D3D11", "DXVA", 'CUDA', 'FFmpeg'],
-//         'macos': ['VT', 'FFmpeg'],
-//         'ios': ['VT', 'FFmpeg'],
-//         'linux': ['VAAPI', 'CUDA', 'VDPAU', 'FFmpeg'],
-//         'android': ['AMediaCodec', 'FFmpeg'],
-//       };
-//       _decoders = vd[Platform.operatingSystem];
-//     }
+    if (_decoders == null && !PlatformEx.isAndroidEmulator()) {
+      // prefer hardware decoders
+      const vd = {
+        'windows': ['MFT:d3d=11', "D3D11", "DXVA", 'CUDA', 'FFmpeg'],
+        'macos': ['VT', 'FFmpeg'],
+        'ios': ['VT', 'FFmpeg'],
+        'linux': ['VAAPI', 'CUDA', 'VDPAU', 'FFmpeg'],
+        'android': ['AMediaCodec', 'FFmpeg'],
+      };
+      _decoders = vd[Platform.operatingSystem];
+    }
 
-// // delay: ensure log handler is set in main(), blank window if run with debugger.
-// // registerWith() can be invoked by dart_plugin_registrant.dart before main. when debugging, won't enter main if posting message from native to dart(new native log message) before main?
-//     Future.delayed(const Duration(milliseconds: 0), () {
-//       _setupMdk();
-//     });
+// delay: ensure log handler is set in main(), blank window if run with debugger.
+// registerWith() can be invoked by dart_plugin_registrant.dart before main. when debugging, won't enter main if posting message from native to dart(new native log message) before main?
+    Future.delayed(const Duration(milliseconds: 0), () {
+      _setupMdk();
+    });
 
-//     _prevImpl ??= VideoPlayerPlatform.instance;
-//     VideoPlayerPlatform.instance = MdkVideoPlayerPlatform();
+    _prevImpl ??= VideoPlayerPlatform.instance;
+    VideoPlayerPlatform.instance = MdkVideoPlayerPlatform();
   }
 
   static void _setupMdk() {
